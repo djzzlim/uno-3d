@@ -245,7 +245,7 @@ export default function GameBoard() {
       />
 
       {/* 3D Table Surface (Auto-scaling container) */}
-      <div className="absolute inset-0 flex items-center justify-center transform-style-3d rotate-x-[25deg] scale-[0.45] xs:scale-[0.55] sm:scale-[0.65] md:scale-[0.8] lg:scale-[0.9] translate-y-[-20%] sm:translate-y-[-10%]">
+      <div className="absolute inset-0 flex items-center justify-center transform-style-3d rotate-x-[25deg] scale-[0.55] xs:scale-[0.65] sm:scale-[0.75] md:scale-[0.8] lg:scale-[0.9] translate-y-[-15%] sm:translate-y-[-10%]">
         
         {/* The Felt Table - Further reduced for maximum visibility */}
         <div className="w-[850px] h-[500px] bg-[#1b4332] rounded-[150px] relative border-[15px] border-[#2b1b17] shadow-[0_50px_80px_rgba(0,0,0,0.9)] flex items-center justify-center">
@@ -612,7 +612,7 @@ export default function GameBoard() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.2 }}
-                className="absolute top-40 left-0 right-0 flex justify-center pointer-events-none z-[600]"
+                className="absolute top-20 sm:top-40 left-0 right-0 flex justify-center pointer-events-none z-[600]"
             >
                 <div className={cn(
                     "px-10 py-3 rounded-full font-black text-xl uppercase italic shadow-2xl border-4 border-black animate-pulse backdrop-blur-md transition-colors duration-500",
@@ -632,7 +632,7 @@ export default function GameBoard() {
                 initial={{ opacity: 0, y: -100 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="absolute top-24 left-0 right-0 flex justify-center pointer-events-none z-[700]"
+                className="absolute top-12 sm:top-24 left-0 right-0 flex justify-center pointer-events-none z-[700]"
               >
                   <div className={cn(
                       "px-8 py-2 rounded-2xl font-black text-white text-2xl uppercase italic border-4 border-white shadow-2xl",
