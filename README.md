@@ -1,6 +1,6 @@
-# UNO! 3D — Old School Style
+# UNO! 3D — The Classic Way
 
-A modern, fast-paced, and visually stunning 3D UNO! game built with Next.js and PeerJS. This is a **Vibe Coded** project—designed for the ultimate "old school" feel with a sleek 3D twist. Experience the classic card game with aggressive stacking rules, elimination mechanics, and real-time P2P multi-player action.
+A modern, fast-paced, and visually stunning 3D UNO! game built with Next.js and PeerJS. This is a **Vibe Coded** project—designed to capture the **Classic Way** we used to play in the past, with a sleek 3D twist. Experience the classic card game with aggressive stacking rules, elimination mechanics, and real-time P2P multi-player action.
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
