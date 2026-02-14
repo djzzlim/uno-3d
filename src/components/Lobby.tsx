@@ -75,11 +75,12 @@ export default function Lobby({ onBack }: LobbyProps) {
             <h2 className="font-black uppercase tracking-widest text-base sm:text-lg">Players ({gameState?.players.length}/20)</h2>
           </div>
           
-          <div className="p-4 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 overflow-y-auto flex-1 no-scrollbar pb-20">
+          <div className="p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 overflow-y-auto flex-1 no-scrollbar pb-24 content-start">
             {gameState?.players.map((p) => (
-              <div key={p.id} className="flex items-center gap-4 bg-slate-900/50 p-4 rounded-2xl border border-white/5 shadow-inner">
-                <div className={cn("w-3 h-3 rounded-full shadow-[0_0_10px_currentColor]", p.isHost ? 'text-yellow-400 bg-yellow-400' : 'text-green-400 bg-green-400')} />
-                <span className="font-black uppercase text-xs sm:text-sm tracking-tight truncate">{p.name} {p.isHost && '(Host)'}</span>
+              <div key={p.id} className="flex items-center gap-2 bg-slate-900/50 px-3 py-1.5 h-10 rounded-lg border border-white/5 shadow-inner">
+                <div className={cn("w-2 h-2 rounded-full shadow-[0_0_8px_currentColor] flex-shrink-0", p.isHost ? 'text-yellow-400 bg-yellow-400' : 'text-green-400 bg-green-400')} />
+                <span className="font-black uppercase text-[10px] leading-none tracking-tight truncate flex-1">{p.name}</span>
+                {p.isHost && <span className="text-yellow-400 text-[10px]">★</span>}
               </div>
             ))}
           </div>

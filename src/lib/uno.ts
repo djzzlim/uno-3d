@@ -96,7 +96,7 @@ export class GameEngine {
     }
 
     this.state = {
-      players: players.map(p => ({ ...p, hand: [], hasCalledUno: false })),
+      players: players.map(p => ({ ...p, hand: [], hasCalledUno: false, isEliminated: false })),
       currentPlayerIndex: 0,
       direction: 1,
       discardPile: [initialDiscard],
@@ -268,22 +268,16 @@ export class GameEngine {
         
         if (isValidMove(lastDrawn, topCard, this.state.activeColor, 0)) {
             foundPlayable = true;
-            
-            // AUTOMATICALLY PLAY the card we just found
-            const cardId = lastDrawn.id;
-            // If it's a wild, it defaults to Red (player can change later if they played manually, 
-            // but for auto-draw we pick a default to keep game moving)
-            this.playCard(player.id, [cardId], 'red');
-            return true; // playCard handles turn advancement and elimination
+            break;
         }
       }
 
-      // If we hit 21 without finding a playable card
-      if (this.checkAndEliminate(player)) {
-          // Handled
-      } else {
-          this.advanceTurn(1);
+      // If we never found a playable card and hit the limit, eliminate the player
+      if (!foundPlayable && player.hand.length >= 21) {
+          this.checkAndEliminate(player);
       }
+      // If foundPlayable is true, we do NOT advance the turn.
+      // The player now has the playable card in their hand and must play it.
     }
 
     return true;

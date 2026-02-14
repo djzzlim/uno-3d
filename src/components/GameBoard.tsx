@@ -318,17 +318,21 @@ export default function GameBoard() {
                 <div className="w-24 h-36 relative">
                    <div className="absolute inset-0 border-2 border-white/10 rounded-xl" />
                    <AnimatePresence mode="popLayout">
-                       {gameState.discardPile.slice(-5).map((card, i) => (
-                           <motion.div 
-                             key={card.id}
-                             initial={{ scale: 2, opacity: 0, y: -300, rotate: 90 }}
-                             animate={{ scale: 1, opacity: 1, y: 0, rotate: (i - 2) * 8 + (Math.random() * 10 - 5) }}
-                             className="absolute inset-0 shadow-2xl"
-                             style={{ zIndex: i }}
-                           >
-                               <Card card={card} size="md" />
-                           </motion.div>
-                       ))}
+                       {gameState.discardPile.slice(-5).map((card, i) => {
+                           // Use a stable rotation based on card ID to avoid hydration mismatch
+                           const stableRotation = card.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 20 - 10;
+                           return (
+                               <motion.div 
+                                 key={card.id}
+                                 initial={{ scale: 2, opacity: 0, y: -300, rotate: 90 }}
+                                 animate={{ scale: 1, opacity: 1, y: 0, rotate: (i - 2) * 8 + stableRotation }}
+                                 className="absolute inset-0 shadow-2xl"
+                                 style={{ zIndex: i }}
+                               >
+                                   <Card card={card} size="md" />
+                               </motion.div>
+                           );
+                       })}
                    </AnimatePresence>
                 </div>
             </div>

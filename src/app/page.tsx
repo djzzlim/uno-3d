@@ -11,6 +11,7 @@ function HomeContent() {
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
   const [isJoined, setIsJoined] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
   const [showJoinInput, setShowJoinInput] = useState(false);
   const { initPeer, hostRoom, joinRoom, gameState, resetGame } = useGameStore();
 
@@ -25,16 +26,30 @@ function HomeContent() {
 
   const handleHost = async () => {
     if (!name) return alert('Enter your nickname');
-    await initPeer(name);
-    hostRoom();
-    setIsJoined(true);
+    setIsConnecting(true);
+    try {
+        await initPeer(name);
+        hostRoom();
+        setIsJoined(true);
+    } catch (e) {
+        alert('Failed to connect. Try again.');
+    } finally {
+        setIsConnecting(false);
+    }
   };
 
   const handleJoin = async () => {
     if (!name || !code) return alert('Enter name and room code');
-    await initPeer(name);
-    joinRoom(code);
-    setIsJoined(true);
+    setIsConnecting(true);
+    try {
+        await initPeer(name);
+        joinRoom(code);
+        setIsJoined(true);
+    } catch (e) {
+        alert('Connection failed. Is the room code correct?');
+    } finally {
+        setIsConnecting(false);
+    }
   };
 
   const handleBack = () => {
@@ -80,13 +95,15 @@ function HomeContent() {
                 <div className="pt-4 space-y-4">
                     <button
                         onClick={handleHost}
-                        className="w-full rounded-2xl bg-yellow-400 py-5 font-black text-slate-950 hover:bg-yellow-300 transition-all shadow-[0_10px_20px_rgba(250,204,21,0.2)] hover:scale-[1.02] active:scale-95 text-xl uppercase italic"
+                        disabled={isConnecting}
+                        className="w-full rounded-2xl bg-yellow-400 py-5 font-black text-slate-950 hover:bg-yellow-300 transition-all shadow-[0_10px_20px_rgba(250,204,21,0.2)] hover:scale-[1.02] active:scale-95 text-xl uppercase italic disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        Create Room
+                        {isConnecting ? 'Establishing...' : 'Create Room'}
                     </button>
                     
                     <button
                         onClick={() => setShowJoinInput(true)}
+                        disabled={isConnecting}
                         className="w-full rounded-2xl bg-slate-700/50 py-5 font-black text-white hover:bg-slate-700 transition-all border border-white/5 hover:scale-[1.02] active:scale-95 text-xl uppercase italic"
                     >
                         Join Room
@@ -120,15 +137,17 @@ function HomeContent() {
                     <div className="pt-4 flex gap-3">
                         <button
                             onClick={() => setShowJoinInput(false)}
+                            disabled={isConnecting}
                             className="flex-1 rounded-2xl bg-slate-900 py-5 font-black text-slate-400 hover:text-white transition-all border border-white/5 uppercase italic"
                         >
                             Back
                         </button>
                         <button
                             onClick={handleJoin}
-                            className="flex-[2] rounded-2xl bg-blue-600 py-5 font-black text-white hover:bg-blue-500 transition-all shadow-[0_10px_20px_rgba(37,99,235,0.2)] uppercase italic"
+                            disabled={isConnecting}
+                            className="flex-[2] rounded-2xl bg-blue-600 py-5 font-black text-white hover:bg-blue-500 transition-all shadow-[0_10px_20px_rgba(37,99,235,0.2)] uppercase italic disabled:opacity-50"
                         >
-                            Connect
+                            {isConnecting ? 'Connecting...' : 'Connect'}
                         </button>
                     </div>
                 </div>

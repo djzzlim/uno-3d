@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UNO! 3D Multi-Player Experience
 
-## Getting Started
+A modern, fast-paced, and visually stunning 3D UNO! game built with Next.js and PeerJS. Experience the classic card game with aggressive stacking rules, elimination mechanics, and real-time P2P multi-player action.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PeerJS](https://img.shields.io/badge/PeerJS-333333?style=for-the-badge&logo=p2p&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **3D Interactive Table:** Immersive game board with dynamic lighting and 3D animations.
+- **Real-time Multi-player:** P2P connectivity via PeerJS—no central server required.
+- **Aggressive Rules:**
+  - **Stacking:** Stack +2 and +4 cards to punish your opponents.
+  - **Auto-Draw:** Keep drawing until you find a playable card.
+  - **Elimination:** Players with more than 21 cards are "BOOMED" out of the game.
+- **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop.
+- **Sound Effects:** Immersive audio for card throws, draws, and turn notifications.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend:** Next.js 15+ (App Router), TypeScript
+- **Styling:** Tailwind CSS 4, Framer Motion (Animations)
+- **State Management:** Zustand
+- **Networking:** PeerJS (WebRTC)
+- **Visuals:** Canvas-Confetti, Lucide Icons
 
-## Learn More
+## 🎮 How to Play
 
-To learn more about Next.js, take a look at the following resources:
+1. **Host a Room:** Enter your nickname and click "Create Room". Share the generated Link or Room ID with your friends.
+2. **Join a Room:** Paste the Room ID or click the invite link provided by the host.
+3. **Gameplay:** 
+   - Play cards matching the color or value of the top card.
+   - Use Wild cards to change the active color.
+   - If you have one card left, don't forget to press the **UNO!** button before someone challenges you!
+   - Be careful—if you reach 21 cards, you're eliminated!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Installation & Local Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/uno-3d.git
+   cd uno-3d
+   ```
 
-## Deploy on Vercel
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📄 License
+
+MIT

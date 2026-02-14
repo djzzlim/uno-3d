@@ -140,6 +140,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
           const { type, payload } = data;
           
           if (type === 'JOIN') {
+            const { gameState } = get();
+            
+            // Check if player ID already exists to prevent duplicates
+            if (gameState?.players.some(p => p.id === conn.peer)) {
+                console.log('Player already joined, ignoring duplicate JOIN request');
+                return;
+            }
+
             const newPlayer: Player = {
               id: conn.peer,
               name: payload.name,
@@ -265,7 +273,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     if (!isHost || !gameState) return;
 
     // Create fresh state with same players but reset hands/pile
-    engine = new GameEngine(gameState.players.map(p => ({ ...p, hand: [], hasCalledUno: false })));
+    engine = new GameEngine(gameState.players.map(p => ({ ...p, hand: [], hasCalledUno: false, isEliminated: false })));
     set({ gameState: engine.state });
     get().broadcastState();
   },
