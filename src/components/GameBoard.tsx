@@ -537,10 +537,19 @@ export default function GameBoard() {
 
       {/* My Hand (Fixed at bottom) */}
       <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 h-56 sm:h-64 lg:h-80 flex items-end justify-center pb-8 sm:pb-12 perspective-[1000px] z-[500] pointer-events-none">
-          <div className="relative flex -space-x-8 xs:-space-x-10 sm:-space-x-10 pointer-events-auto items-end hover:items-start transition-all duration-500">
+          <div className="relative flex pointer-events-auto items-end hover:items-start transition-all duration-500">
               {me?.hand.map((card, i) => {
-                  const rotation = (i - (me.hand.length - 1) / 2) * (Math.min(40 / me.hand.length, 6));
-                  const translateY = Math.abs(i - (me.hand.length - 1) / 2) * (Math.min(15 / me.hand.length, 3));
+                  const totalCards = me.hand.length;
+                  const isLargeHand = totalCards > 10;
+                  
+                  // Dynamic spacing calculation
+                  // Base overlap increases as hand size grows
+                  const overlap = isMobile 
+                    ? Math.min(45, 20 + (totalCards * 1.5)) 
+                    : Math.min(60, 30 + (totalCards * 1));
+
+                  const rotation = (i - (totalCards - 1) / 2) * (Math.min(50 / totalCards, 6));
+                  const translateY = Math.abs(i - (totalCards - 1) / 2) * (Math.min(20 / totalCards, 4));
                   const isSelected = selectedCards.includes(card.id);
                   const canBeFirstCard = isMyTurn && isValidMove(card, topCard, gameState.activeColor, gameState.drawStack);
                   
@@ -559,7 +568,8 @@ export default function GameBoard() {
                             y: isSelected ? -60 : translateY, 
                             rotate: isSelected ? 0 : rotation, 
                             opacity: 1,
-                            scale: isSelected ? 1.2 : 1
+                            scale: isSelected ? 1.2 : 1,
+                            marginLeft: i === 0 ? 0 : -overlap
                         }}
                         whileHover={{ y: -100, rotate: 0, scale: 1.5, zIndex: 1000 }}
                         whileTap={{ scale: 1.4 }}
